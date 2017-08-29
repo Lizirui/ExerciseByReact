@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      var Hello = React.createClass({
+        getInitialState: function() {
+          return {opacity: 1.0}
+        },
+        componentDidMount: function() {
+          this.timer = setInterval(function() {
+            var opacity = this.state.opacity
+            opacity -= .05
+            if(opacity < 0.1){
+              opacity = 1.0
+            }
+            // else if(opacity > 0.9){
+            //   opacity -= .05
+            // }
+            this.setState({
+              opacity
+            })
+          }.bind(this),100)
+        },
+        render: function(){
+          return (
+            <div style={{
+              opacity: this.state.opacity,
+              color: 'red'
+            }}>
+              Hello {this.props.name}
+            </div>
+          )
+        }
+      })
+
+      ReactDOM.render(
+        <Hello name="lizirui"/>,
+        document.getElementById('app')
+      )
+    </script>
+  </body>
+</html>
